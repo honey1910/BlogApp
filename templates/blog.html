@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% block title %}{{ blog.title }}{% endblock %}
+{% block content %}
+<div class="container mt-4">
+    <h2 class="my-4">{{ blog.title }}</h2>
+    <p class="text-muted">by {{ blog.author }}</p>
+    <div class="card mb-4">
+        <div class="card-body">
+            <p>{{ blog.content }}</p>
+        </div>
+    </div>
+    {% if current_user.is_authenticated and blog.author == current_user.username %}
+        <a href="{{ url_for('delete_blog', blog_id=blog.id) }}" class="btn btn-danger">Delete</a>
+    {% endif %}
+</div>
+{% endblock %}
